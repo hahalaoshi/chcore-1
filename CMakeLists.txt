@@ -56,7 +56,6 @@ include_directories(".")
 include_directories("${KERNEL_PATH}")
 
 
-
 add_subdirectory("${KERNEL_ARCH_PATH}")
 add_subdirectory("${KERNEL_TESTS_PATH}")
 add_subdirectory("${KERNEL_IPC_PATH}")

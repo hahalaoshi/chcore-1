@@ -27,6 +27,7 @@ static void write_num(int base, unsigned long n, int neg) {
     }
     do {
         if (--pos < 0) {
+            // TODO: EXCEPTION
         };
         buff[pos] = hex[n % base];
         n = n / base;
