@@ -1,8 +1,18 @@
 cmake_minimum_required(VERSION 3.14)
 
-file(GLOB OBJECT_SOURCE "*.c")
-add_library(${PROJECT_NAME}-tests OBJECT ${OBJECT_SOURCE})
-target_include_directories(
-	${PROJECT_NAME}-tests
-	PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
-)
+project(Tests C)
+
+set(ARCH "aarch64")
+set(PLAT "raspi3")
+
+set(KERNEL_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../kernel")
+set(KERNEL_MM_PATH          "${KERNEL_PATH}/mm")
+set(KERNEL_INCLUDE_PATH "${KERNEL_PATH}/common")
+include_directories("${KERNEL_INCLUDE_PATH}")
+
+
+add_library(minunit INTERFACE)
+target_include_directories(minunit INTERFACE
+    "include")
+
+add_subdirectory(sched)

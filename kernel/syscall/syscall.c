@@ -89,6 +89,7 @@ const void *syscall_table[NR_SYSCALL] = {
         [SYS_exit] = sys_exit,
         [SYS_create_pmo] = sys_create_pmo,
         [SYS_map_pmo] = sys_map_pmo,
-        [SYS_handle_brk] = sys_handle_brk
-
+        [SYS_handle_brk] = sys_handle_brk,
+        [SYS_ipc_send] = sys_ipc_send,
+        [SYS_ipc_recv] = sys_ipc_recv
 };

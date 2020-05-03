@@ -25,48 +25,6 @@
 
 #define SHADOW_THREAD_PRIO MAX_PRIO - 1
 
-/**
- * Helper function called when an ipc_connection is created
- */
-static struct thread *create_server_thread(struct thread *src) {
-    struct thread *new;
-
-    new = kmalloc(sizeof(struct thread));
-    BUG_ON(new == NULL);
-
-    new->vmspace = obj_get(src->process, VMSPACE_OBJ_ID, TYPE_VMSPACE);
-    BUG_ON(!new->vmspace);
-
-    // Init the thread ctx
-    new->thread_ctx = create_thread_ctx();
-    if (!new->thread_ctx)
-        goto out_fail;
-    memcpy((char *) &(new->thread_ctx->ec),
-           (const char *) &(src->thread_ctx->ec), sizeof(arch_exec_cont_t));
-    new->thread_ctx->prio = SHADOW_THREAD_PRIO;
-    new->thread_ctx->state = TS_INIT;
-    new->thread_ctx->affinity = NO_AFF;
-    new->thread_ctx->sc = NULL;
-    new->thread_ctx->type = TYPE_SHADOW;
-
-    // Init the server ipc
-    new->server_ipc_config = kzalloc(sizeof(struct server_ipc_config));
-    if (!new->server_ipc_config)
-        goto out_destroy_thread_ctx;
-    new->server_ipc_config->callback = src->server_ipc_config->callback;
-    new->server_ipc_config->vm_config = src->server_ipc_config->vm_config;
-    new->process = src->process;
-
-    obj_put(new->vmspace);
-    return new;
-
-    out_destroy_thread_ctx:
-    destroy_thread_ctx(new);
-    out_fail:
-    obj_put(new->vmspace);
-    kfree(new);
-    return NULL;
-}
 
 /**
  * Helper function to create an ipc_connection by the client thread
@@ -92,7 +50,9 @@ static int create_connection(struct thread *source, struct thread *target,
         ret = -ENOMEM;
         goto out_fail;
     }
-    conn->target = create_server_thread(target);
+    conn->target = target;
+    target->active_conn = conn;
+    target->active_conn->source = source;
     if (!conn->target) {
         ret = -ENOMEM;
         goto out_fail;
@@ -121,7 +81,6 @@ static int create_connection(struct thread *source, struct thread *target,
                       VMR_READ | VMR_WRITE, stack_pmo);
 
     conn->server_stack_top = server_stack_base + stack_size;
-
     // Create and map the shared buffer for client and server
     server_buf_base =
             vm_config->buf_base_addr + conn_idx * vm_config->buf_size;
@@ -159,6 +118,8 @@ static int create_connection(struct thread *source, struct thread *target,
         goto out_free_obj;
     }
     conn->server_conn_cap = server_conn_cap;
+
+
 
     return conn_cap;
     out_free_stack_pmo:

@@ -65,6 +65,7 @@ int handle_trans_fault(struct vmspace *vmspace, vaddr_t fault_addr) {
     struct pmobject *pmo;
     u64 len;
     paddr_t pa;
+    // TODO: WTH IS THIS?
     //    u64 offset;
     /*
      * Lab3: your code here

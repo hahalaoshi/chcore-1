@@ -89,6 +89,8 @@ struct thread_ctx {
 
     /* Current Assigned CPU */
     u32 cpuid;
+    u32 ready;
+    u32 msg;
 };
 
 /* Debug functions */

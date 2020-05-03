@@ -37,6 +37,8 @@ struct server_ipc_config {
     /* bitmap for shared buffer and stack allocation */
     unsigned long *conn_bmp;
     struct ipc_vm_config vm_config;
+    bool ready;
+    u64 msg;
 };
 
 struct shared_buf {
@@ -83,3 +85,5 @@ u64 sys_ipc_reg_call(u32 conn_cap, u64 arg);
 void sys_ipc_return(u64 ret);
 
 #define LAB4_IPC_BLANK 0
+u32 sys_ipc_send(u32 conn_cap, u64 msg);
+u64 sys_ipc_recv();

@@ -10,6 +10,7 @@ struct info_page {
 	volatile u64 ready_flag;
 	volatile u64 exit_flag;
 	u64 nr_args;
+	u64 msg;
 	u64 args[];
 };
 

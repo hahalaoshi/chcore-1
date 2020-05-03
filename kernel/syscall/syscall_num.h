@@ -41,6 +41,9 @@ void sys_register_client(void);
 void sys_ipc_call(void);
 void sys_ipc_reg_call(void);
 void sys_ipc_return(void);
+void sys_ipc_send(void);
+void sys_ipc_recv(void);
+
 
 
 
@@ -85,3 +88,5 @@ void sys_ipc_return(void);
 #define SYS_fs_load_cpio			253
 #define SYS_debug				255
 
+#define SYS_ipc_send 202
+#define SYS_ipc_recv 203

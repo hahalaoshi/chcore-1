@@ -42,6 +42,7 @@ void enable_smp_cores(void *addr) {
          * The BSP waits for the currently initializing AP finishing
          * before activating the next one
          */
+        // FIXME: CPU_RUN OR CPU_IDLE
         while (i != smp_get_cpu_id() && cpu_status[i] != cpu_run);
     }
 

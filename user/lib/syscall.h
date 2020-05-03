@@ -38,6 +38,8 @@
 /* TEMP */
 #define SYS_fs_load_cpio        253
 #define SYS_debug               255
+#define SYS_ipc_send 202
+#define SYS_ipc_recv 203
 
 int usys_fs_load_cpio(u64 vaddr);
 /* TEMP END */
@@ -73,3 +75,5 @@ int usys_map_pmos(u64, void *, u64);
 int usys_write_pmo(u64, u64, void *, u64);
 int usys_read_pmo(u64 cap, u64 offset, void *buf, u64 size);
 int usys_transfer_caps(u64, int *, int, int *);
+u32 usys_ipc_send(u32 conn_cap, u64 msg);
+u64 usys_ipc_recv();

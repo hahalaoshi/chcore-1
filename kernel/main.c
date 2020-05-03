@@ -117,6 +117,7 @@ void secondary_start(void) {
     /**
      *  Lab 4
      *  Acquire the big kernel lock
+        TODO
      */
     lock_kernel();
     /* Where the AP first returns to the user mode */

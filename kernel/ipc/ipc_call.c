@@ -198,6 +198,7 @@ u64 sys_ipc_call(u32 conn_cap, ipc_msg_t *ipc_msg) {
  * */
 u64 sys_ipc_reg_call(u32 conn_cap, u64 arg0) {
     struct ipc_connection *conn = NULL;
+
     int r;
     BUG_ON(current_thread == NULL);
     conn = obj_get(current_thread->process, conn_cap, TYPE_CONNECTION);

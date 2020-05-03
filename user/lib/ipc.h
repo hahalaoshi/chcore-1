@@ -29,7 +29,8 @@ u64 ipc_get_msg_cap(ipc_msg_t *ipc_msg, u64 cap_id);
 int ipc_set_msg_data(ipc_msg_t *ipc_msg, char* data, u64 offset, u64 len);
 int ipc_set_msg_cap(ipc_msg_t *ipc_msg, u64 cap_slot_index, u32 cap);
 int ipc_destroy_msg(ipc_msg_t *ipc_msg);
-
+u32 ipc_send(ipc_struct_t *icb, u64 msg);
+u64 ipc_recv();
 int ipc_call(ipc_struct_t *icb, ipc_msg_t *ipc_msg);
 int ipc_reg_call(ipc_struct_t *icb, u64 arg);
 void ipc_return(int ret);

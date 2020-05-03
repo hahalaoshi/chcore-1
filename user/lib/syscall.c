@@ -7,6 +7,7 @@ u64 syscall(u64 sys_no, u64 arg0, u64 arg1, u64 arg2, u64 arg3, u64 arg4,
             u64 arg5, u64 arg6, u64 arg7, u64 arg8) {
 
     u64 ret = 0;
+    // TODO: arg8
     /*
      * Lab3: Your code here
      * Use inline assembly to store arguments into x0 to x7, store syscall number to x8,
@@ -113,7 +114,12 @@ u64 usys_ipc_call(u32 conn_cap, u64 arg0) {
 u64 usys_ipc_reg_call(u32 conn_cap, u64 arg0) {
     return syscall(SYS_ipc_reg_call, conn_cap, arg0, 0, 0, 0, 0, 0, 0, 0);
 }
-
+u32 usys_ipc_send(u32 conn_cap, u64 msg) {
+    return syscall(SYS_ipc_send, conn_cap, msg, 0, 0, 0, 0, 0, 0, 0);
+}
+u64 usys_ipc_recv() {
+    return syscall(SYS_ipc_recv, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+}
 void usys_ipc_return(u64 ret) {
     syscall(SYS_ipc_return, ret, 0, 0, 0, 0, 0, 0, 0, 0);
 }

@@ -6,4 +6,5 @@ add_library(${PROJECT_NAME}-ipc OBJECT ${OBJECT_SOURCE})
 target_include_directories(
 	${PROJECT_NAME}-ipc
 	PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
+
 )
