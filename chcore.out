@@ -1,0 +1,53 @@
+*** Now run 'make gdb'.
+***
+[BOOT] Install boot page table
+[BOOT] init boot page table: first_vaddr=0xffffff0000000000 first_paddr=0x0
+index 0
+_boot_pgd_up is 83000
+_boot_pud_up is 84000
+_boot_pmd_up is 81000
+[BOOT] Enable el1 MMU
+[BOOT] Jump to kernel main at 0xffffff00000cc000
+
+
+
+
+[2J[INFO] [ChCore] uart init finished
+[INFO] 6828 decimal is 1aac hex!
+[INFO] entering test_backtrace 5
+[INFO] entering test_backtrace 4
+[INFO] entering test_backtrace 3
+[INFO] entering test_backtrace 2
+[INFO] entering test_backtrace 1
+[INFO] entering test_backtrace 0
+Stack backtrace:
+  LR ffffff00000cc09c  FP ffffff00001ee8c0  Args 0 0 0 ffffffffffffffff ffffff00001ee8e0
+  LR ffffff00000cc09c  FP ffffff00001ee8e0  Args 1 ffffffffffffffff ffffff00001ee900 ffffff00000cc09c 2
+  LR ffffff00000cc09c  FP ffffff00001ee900  Args 2 ffffffffffffffff ffffff00001ee920 ffffff00000cc09c 3
+  LR ffffff00000cc09c  FP ffffff00001ee920  Args 3 ffffffffffffffff ffffff00001ee940 ffffff00000cc09c 4
+  LR ffffff00000cc09c  FP ffffff00001ee940  Args 4 ffffffffffffffff ffffff00001ee960 ffffff00000cc09c 5
+  LR ffffff00000cc0d8  FP ffffff00001ee960  Args 5 ffffffffffffffff ffffff00001ee980 ffffff00000cc0d8 87350
+  LR ffffff00000cc018  FP ffffff00001ee980  Args 87350 ffffffffffffffff 88550 ffffff00000cc018 0
+  LR 80080  FP 88550  Args 0 0 0 0 0
+  LR 0  FP 0  Args 0 0 0 0 0
+[INFO] leaving test_backtrace 0
+[INFO] leaving test_backtrace 1
+[INFO] leaving test_backtrace 2
+[INFO] leaving test_backtrace 3
+[INFO] leaving test_backtrace 4
+[INFO] leaving test_backtrace 5
+[INFO] mm init finished
+[INFO] [ChCore] interrupt init finished
+[INFO] [ChCore] lock init finished
+[INFO] [ChCore] sched init finished
+[INFO] AP 1 is activated!
+[INFO] AP 2 is activated!
+[INFO] AP 3 is activated!
+[INFO] All 4 CPUs are active
+[INFO] [ChCore] boot multicore finished
+[INFO] [ChCore] root thread init finished
+[Parent] create the server process.
+[Client] Return 526!
+[Client] exit
+[Server] exit
+qemu-system-aarch64: terminating on signal 15 from pid 4445 (make)

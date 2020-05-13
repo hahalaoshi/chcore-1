@@ -1,0 +1,1 @@
+apple banana This is a test file.
